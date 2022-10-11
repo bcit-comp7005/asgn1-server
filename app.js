@@ -1,8 +1,9 @@
 const http = require('http');
-
+const path = require('path');
 const formidable = require('formidable');
-const { getServerPort, getUploadedFilePath } = require('./helpers/serverHelpers');
-const { storeFiles } = require('./helpers/fileHelpers');
+
+const { getClientIP, getServerPort, getUploadedFilePath } = require('./helpers/serverHelpers');
+const { listDirectory, storeFiles } = require('./helpers/fileHelpers');
 
 const port = getServerPort();
 const fileUploadPath = getUploadedFilePath(__dirname);
@@ -21,13 +22,26 @@ http.createServer((req, res) => {
       storeFiles(res, fileUploadPath, req.socket.remoteAddress, files);
     });
   } else {
+    const clientIP = getClientIP(req);
+    const writeDir = path.join(fileUploadPath, clientIP);
+    const currentFiles = listDirectory(writeDir);
+    const currentFileString = currentFiles.length > 0
+      ? `<li>${currentFiles.join('</li><li>')}</li>`
+      : 'No files found';
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(`
-      <form action="/upload" enctype="multipart/form-data" method="post">
-        <div>Text field title: <input type="text" name="title" /></div>
-        <div>File: <input type="file" name="files" multiple="multiple" /></div>
-        <input type="submit" value="Upload" />
-      </form>
+    <!DOCTYPE html>
+    <html>
+       <head>
+          <title>Files</title>
+       </head>
+       <body>
+          <p>The following are the files you have uploaded:</p>
+          <dir>
+             ${currentFileString}
+          </dir>
+       </body>
+    </html>
     `);
   }
 }).listen(port, () => {

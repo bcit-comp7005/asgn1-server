@@ -101,5 +101,6 @@ const storeFiles = (req, res, dir, { files }) => {
 };
 
 module.exports = {
+  listDirectory,
   storeFiles,
 };
