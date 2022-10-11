@@ -66,7 +66,7 @@ const storeFile = (file, dir, dirContent) => {
     version++;
   }
   console.log(`storing file ${path.join(dir, filename)}`);
-  fs.rename(
+  fs.copyFile(
     file.filepath,
     path.join(dir, filename),
     (err) => {
