@@ -70,6 +70,7 @@ const getUploadedFilePath = (basePath) => {
  * @returns IP Address
  */
 const getClientIP = (req) => {
+  return req.socket.remoteAddress;
   const ip = req.headers['x-forwarded-for']?.split(',').shift() || req.socket?.remoteAddress;
   return ip !== '::1' ? ip : 'localhost';
 };
