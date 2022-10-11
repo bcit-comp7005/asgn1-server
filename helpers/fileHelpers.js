@@ -28,9 +28,10 @@ const validateDir = (dir) => {
  * @param {String} dir
  * @returns
  */
-const listDirectory = (dir) => (
-  fs.readdirSync(dir)
-);
+const listDirectory = (dir) => {
+  validateDir(dir);
+  return fs.readdirSync(dir);
+};
 
 /**
  * Append a string to the end of a filename
@@ -91,7 +92,6 @@ const storeFiles = (req, res, dir, { files }) => {
   const writeDir = path.join(dir, clientIP);
   const filesToStore = Array.isArray(files) ? files : [files];
 
-  validateDir(writeDir);
   const currentFiles = listDirectory(writeDir);
   Promise.all(filesToStore.map((file) => storeFile(file, writeDir, currentFiles)))
     .then((storedFileNames) => {
