@@ -1,0 +1,29 @@
+{
+  "name": "a1-file-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "app": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcit-comp7005/asgn1-server.git"
+  },
+  "author": "Andrew Lukonin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bcit-comp7005/asgn1-server/issues"
+  },
+  "homepage": "https://github.com/bcit-comp7005/asgn1-server#readme",
+  "devDependencies": {
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb": "^19.0.4"
+  },
+  "dependencies": {
+    "formidable": "^2.0.1",
+    "minimist": "^1.2.7",
+    "nodemon": "^2.0.20"
+  }
+}
