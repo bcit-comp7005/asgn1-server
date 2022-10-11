@@ -4,9 +4,7 @@ const formidable = require('formidable');
 const { getServerPort, getUploadFilePath } = require('./helpers/serverHelpers');
 
 const port = getServerPort();
-console.log(`got port: ${port}`);
 const fileUploadPath = getUploadFilePath(__dirname);
-console.log(`got file path: ${fileUploadPath}`);
 
 const server = http.createServer((req, res) => {
   if (req.url === '/api/upload' && req.method.toLowerCase() === 'post') {
