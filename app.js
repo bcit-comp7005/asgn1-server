@@ -19,7 +19,7 @@ http.createServer((req, res) => {
         res.end(String(err));
         return;
       }
-      storeFiles(res, fileUploadPath, req.socket.remoteAddress, files);
+      storeFiles(req, res, fileUploadPath, files);
     });
   } else {
     const clientIP = getClientIP(req);
