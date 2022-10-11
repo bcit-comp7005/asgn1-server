@@ -18,7 +18,7 @@ http.createServer((req, res) => {
         res.end(String(err));
         return;
       }
-      storeFiles(req, res, fileUploadPath, files);
+      storeFiles(res, fileUploadPath, req.socket.remoteAddress, files);
     });
   } else {
     res.writeHead(200, { 'Content-Type': 'text/html' });

@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const { getClientIP } = require('./serverHelpers');
-
 /**
  * Validate the directory exists (including IP). Create if not exists
  *
@@ -78,8 +76,7 @@ const storeFile = (file, dir, dirContent) => {
   return filename;
 };
 
-const storeFiles = (req, res, dir, { files }) => {
-  const clientIP = getClientIP(req);
+const storeFiles = (res, dir, clientIP, { files }) => {
   const writeDir = path.join(dir, clientIP);
   const filesToStore = Array.isArray(files) ? files : [files];
 

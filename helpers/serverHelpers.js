@@ -61,22 +61,7 @@ const getUploadedFilePath = (basePath) => {
   return fileDir;
 };
 
-/**
- * Gets the IP address of the request
- * Checks if the IP address is behind a proxy and gets the origin. Otherwise, returns the
- * IP address from the request. Localhost requests returns 'localhost'
- *
- * @param {*} req request
- * @returns IP Address
- */
-const getClientIP = (req) => {
-  return req.socket.remoteAddress;
-  const ip = req.headers['x-forwarded-for']?.split(',').shift() || req.socket?.remoteAddress;
-  return ip !== '::1' ? ip : 'localhost';
-};
-
 module.exports = {
-  getClientIP,
   getServerPort,
   getUploadedFilePath,
 };
