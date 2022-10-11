@@ -1,5 +1,8 @@
 const fs = require('fs');
+const { ClientRequest, ServerResponse } = require('http');
 const path = require('path');
+
+const { getClientIP } = require('./serverHelpers');
 
 /**
  * Validate the directory exists (including IP). Create if not exists
@@ -64,7 +67,7 @@ const storeFile = (file, dir, dirContent) => {
     version++;
   }
   console.log(`storing file ${path.join(dir, filename)}`);
-  fs.copyFile(
+  fs.rename(
     file.filepath,
     path.join(dir, filename),
     (err) => {
@@ -76,7 +79,15 @@ const storeFile = (file, dir, dirContent) => {
   return filename;
 };
 
-const storeFiles = (res, dir, clientIP, { files }) => {
+/**
+ *
+ * @param {ClientRequest} req
+ * @param {ServerResponse} res
+ * @param {String} dir
+ * @param {Object} files
+ */
+const storeFiles = (req, res, dir, { files }) => {
+  const clientIP = getClientIP(req);
   const writeDir = path.join(dir, clientIP);
   const filesToStore = Array.isArray(files) ? files : [files];
 
