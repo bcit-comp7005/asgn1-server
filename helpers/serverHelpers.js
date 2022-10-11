@@ -23,13 +23,9 @@ const getServerPort = () => {
     console.error(
       Array.isArray(port)
         ? 'Too many arguments for port.'
-        : 'Invalid input for port.',
+        : 'Invalid argument for port.',
     );
     // Exit the program
-    process.exit(9);
-  }
-  if (port < 1025) {
-    console.error(`Port ${port} is within the reserved ports. Please enter a higher port`);
     process.exit(9);
   }
   return port;
@@ -43,7 +39,7 @@ const getServerPort = () => {
  */
 const getUploadedFilePath = (basePath) => {
   const fileDir = argv.d || path.join(basePath, defaultFileFolder);
-  // Check if the command line input has a port value and that it is actually a number
+  // Check if the command line input has a directory value and that it is valid
   if (argv.hasOwnProperty('d') && !(typeof fileDir === 'string')) {
     console.log('Invalid dir argument');
     process.exit(9);

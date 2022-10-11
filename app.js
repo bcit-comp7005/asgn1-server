@@ -25,7 +25,7 @@ http.createServer((req, res) => {
     res.end(`
       <form action="/upload" enctype="multipart/form-data" method="post">
         <div>Text field title: <input type="text" name="title" /></div>
-        <div>File: <input type="file" name="multipleFiles" multiple="multiple" /></div>
+        <div>File: <input type="file" name="files" multiple="multiple" /></div>
         <input type="submit" value="Upload" />
       </form>
     `);

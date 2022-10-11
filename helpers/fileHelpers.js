@@ -78,7 +78,7 @@ const storeFile = (file, dir, dirContent) => {
   return filename;
 };
 
-const storeFiles = (req, res, dir, { multipleFiles: files }) => {
+const storeFiles = (req, res, dir, { files }) => {
   const clientIP = getClientIP(req);
   const writeDir = path.join(dir, clientIP);
   const filesToStore = Array.isArray(files) ? files : [files];
